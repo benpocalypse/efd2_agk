@@ -3,6 +3,9 @@
 // Created: 2017-05-03
 
 #include "GObject.agc"
+#include "Globals.agc"
+#include "Player.agc"
+#include "Map.agc"
 
 FirstObject AS GObject
 
@@ -24,8 +27,8 @@ UseNewDefaultFonts( 1 ) // since version 2.0.22 we can use nicer default fonts
 FirstObject = GObject_Init(FirstObject, 5, 5, 1)
 
 do
-    
-	Print(FirstObject.BigX)
-    Print( ScreenFPS() )
-    Sync()
+	Print (FirstObject.BigX)
+	Print (GLB_RandomNum(0,255))
+    Print (ScreenFPS())
+    Sync ()
 loop
