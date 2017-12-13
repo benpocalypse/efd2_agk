@@ -45,12 +45,20 @@ FILE_1=GObject.agc;-1
 FILE_2=Globals.agc;-1
 FILE_3=Player.agc;-1
 FILE_4=Map.agc;-1
+FILE_5=LogicManager.agc;-1
+FILE_6=Input.agc;-1
+FILE_7=GameManager.agc;-1
+FILE_8=Enemy.agc;-1
 
 [files]
-FILE_NAME_0=0;main.agc;123;0
-FILE_NAME_1=0;Globals.agc;1091;1
-FILE_NAME_2=0;Player.agc;0;2
-FILE_NAME_3=1;Map.agc;22778;3
+FILE_NAME_0=0;main.agc;224;0
+FILE_NAME_1=0;Globals.agc;1790;1
+FILE_NAME_2=0;Player.agc;7462;2
+FILE_NAME_3=1;Map.agc;13123;3
+FILE_NAME_4=0;LogicManager.agc;12332;4
+FILE_NAME_5=0;Input.agc;1113;5
+FILE_NAME_6=0;GameManager.agc;3452;6
+FILE_NAME_7=0;Enemy.agc;900;7
 
 [project]
 description=

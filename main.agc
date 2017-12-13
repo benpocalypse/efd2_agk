@@ -2,12 +2,9 @@
 // Project: Escape from Dungeon 
 // Created: 2017-05-03
 
-#include "GObject.agc"
+#include "GameManager.agc"
+#include "Input.agc"
 #include "Globals.agc"
-#include "Player.agc"
-#include "Map.agc"
-
-FirstObject AS GObject
 
 // show all errors
 SetErrorMode(2)
@@ -24,11 +21,10 @@ SetSyncRate( 30, 0 ) // 30fps instead of 60 to save battery
 SetScissor( 0,0,0,0 ) // use the maximum available screen space, no black borders
 UseNewDefaultFonts( 1 ) // since version 2.0.22 we can use nicer default fonts
 
-FirstObject = GObject_Init(FirstObject, 5, 5, 1)
+GAME_Init()
 
 do
-	Print (FirstObject.BigX)
-	Print (GLB_RandomNum(0,255))
+	GAME_ManageGame()
     Print (ScreenFPS())
     Sync ()
 loop

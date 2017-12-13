@@ -100,7 +100,7 @@ ENDFUNCTION
 ///****************************************************************************
 /// Simple getter for the current Player Health.
 ///****************************************************************************
-FUNCTION PLY_GetHealth(void)
+FUNCTION PLY_GetHealth()
 	result as INTEGER
     result = (objPlayer.HealthAndState && 0xF0) >> 4
 ENDFUNCTION result
@@ -127,7 +127,7 @@ ENDFUNCTION result
 /// Getter for the Player's velocity that gets the value from a single 8 bit
 /// variable along with the players direction.
 ///****************************************************************************
-FUNCTION PLY_GetVelocity(void)
+FUNCTION PLY_GetVelocity()
 	result as INTEGER
     result = ((objPlayer.VelocityAndDirection && 0xF0) >> 4)
 ENDFUNCTION result
@@ -166,7 +166,7 @@ ENDFUNCTION
 ///****************************************************************************
 /// Simple getter for the player's current location.
 ///****************************************************************************
-FUNCTION PLY_GetCoordinate(void)
+FUNCTION PLY_GetCoordinate()
 	result as Coordinate
     result = objPlayer.objLocation
 ENDFUNCTION result
@@ -185,10 +185,10 @@ ENDFUNCTIOn
 ///****************************************************************************
 /// Simple getter for the player's current 'state'.
 ///****************************************************************************
-FUNCTION PLY_GetState(void)
+FUNCTION PLY_GetState()
 	result as INTEGER
 	result = objPlayer.HealthAndState && 0x0F
-ENDFUNCTION
+ENDFUNCTION result
 
 ///****************************************************************************
 /// Simple setter for the player's current 'state'.
