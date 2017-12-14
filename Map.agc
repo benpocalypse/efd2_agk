@@ -13,19 +13,12 @@
 #constant MT_EXIT     0
 #constant MT_ENTRANCE 1
 
-// Map compresipon size defines
-#constant MODWIDTH	  4  // The number of tiles to be stored in a single unsigned char
-#constant MODSHIFT    2  // The number of bits to shift when compressing our tiles
-#constant MODBITS     3  // The bits for an OR/AND mask in half of an unsigned char
-
-#constant MAPWIDTH_DIV_MODWIDTH 6
-
 // Array size defines
 #constant MAX_OBSTACLES   5
 #constant MAX_ITEMS       5
 
 // Our map data storage array
-global objMap as MapObject[MAPWIDTH_DIV_MODWIDTH, MAPHEIGHT] 
+global objMap as MapObject[MAPWIDTH, MAPHEIGHT] 
 
 // Our entry and exit door objects.
 global objEntrance as MapObject
@@ -38,8 +31,8 @@ global objItems as MapObject[MAX_ITEMS]
 ///****************************************************************************
 FUNCTION MAP_InitializeMap()
     // Empty our map...
-    for i = 0 to (MAPWIDTH/MODWIDTH)
-        for j = 0 to j < MAPHEIGHT
+    for i = 0 to MAPWIDTH
+        for j = 0 to MAPHEIGHT
             objMap[i, j].ObjectType = MT_EMPTY
         next j
     next i
@@ -296,11 +289,16 @@ ENDFUNCTION objReturn
 FUNCTION MAP_TileIs(X as INTEGER, Y as INTEGER)
 	ucReturn as INTEGER
 	
-    if((X < MAPWIDTH) and (Y < MAPHEIGHT))
-        ucReturn =  (objMap[X/MODWIDTH, Y].ObjectType && (MODBITS << ((Mod(X,MODWIDTH))*MODSHIFT))) >> ((Mod(X,MODWIDTH))*MODSHIFT)
-    else
-        ucReturn = 0
-    endif
+	if((X > 0) and (Y > 0))
+		temp as INTEGER
+		temp = objMap.length
+
+		if((X < MAPWIDTH) and (Y < MAPHEIGHT))
+			ucReturn =  objMap[X, Y].ObjectType
+		else
+			ucReturn = 0
+		endif
+	endif
 ENDFUNCTION ucReturn
 
 ///****************************************************************************
@@ -401,12 +399,7 @@ ENDFUNCTION
 /// to work with our compressed map structure.
 ///****************************************************************************
 FUNCTION MAPi_Draw(X as INTEGER, Y as INTEGER, ObjectType as INTEGER)
-    Temp as INTEGER
-    //Temp = ~(MODBITS << ((Mod(X,MODWIDTH))*MODSHIFT))
-    Temp = !(MODBITS << ((Mod(X,MODWIDTH))*MODSHIFT))
-    Temp = Temp && objMap[X/MODWIDTH, Y].ObjectType
-    Temp = Temp || ObjectType << ((Mod(X,MODWIDTH))*MODSHIFT)
-    objMap[X/MODWIDTH, Y].ObjectType = Temp
+    objMap[X, Y].ObjectType = ObjectType
 ENDFUNCTION
 
 
@@ -415,22 +408,22 @@ ENDFUNCTION
 /// non-empty tile is encountered.
 ///****************************************************************************
 FUNCTION MAPi_FloodFill(X as INTEGER, Y as INTEGER, ObjectType as INTEGER)
-   Left as INTEGER
-   Right as INTEGER
+   LeftNum as INTEGER
+   RightNum as INTEGER
    InLine as INTEGER = 1
  
    /// Search to the left, filling along the way.
-   Left = X
-   Right = X
+   LeftNum = X
+   RightNum = X
 
    while(ucInLine = 1)
-		MAPi_Draw(Left, Y, ObjectType)
-		Left = Left - 1
+		MAPi_Draw(LeftNum, Y, ObjectType)
+		LeftNum = LeftNum - 1
 		
-		if (Left < 0)
+		if (LeftNum < 0)
 			InLine = 0
 		else
-			if (MAP_TileIs(Left, Y) = MT_EMPTY)
+			if (MAP_TileIs(LeftNum, Y) = MT_EMPTY)
 				InLine = 1
 			else
 				InLine = 0
@@ -438,29 +431,29 @@ FUNCTION MAPi_FloodFill(X as INTEGER, Y as INTEGER, ObjectType as INTEGER)
 		endif
    endwhile
 
-   Left = Left + 1
+   LeftNum = LeftNum + 1
 
    /// Search to the right, filling along the way.
    ucInLine = 1
 
    while(ucInLine = 1)
-     MAPi_Draw(Right, Y, ObjectType)
-     Right = Right + 1
+     MAPi_Draw(RightNum, Y, ObjectType)
+     RightNum = RightNum + 1
      
-     if (Right > MAPWIDTH-1)
+     if (RightNum > MAPWIDTH-1)
 		 InLine = 0
 	 else
-		 if (MAP_TileIs(Right,y) = MT_EMPTY)
+		 if (MAP_TileIs(RightNum,y) = MT_EMPTY)
 			 InLine = 1
 		 endif
 	 endif
      //ucInLine = (ucRight > MAPWIDTH-1) ? 0 : (MAP_TileIs(ucRight,y) == MT_EMPTY)
    endwhile
 
-   Right = Right - 1
+   RightNum = RightNum - 1
 
    /// Fill the top and bottom.
-	for i = Left to Right
+	for i = LeftNum to RightNum
   
 		if (Y > 0 and (MAP_TileIs(i, y-1) = MT_EMPTY))
 			MAPi_FloodFill(i, Y - 1, ObjectType)
