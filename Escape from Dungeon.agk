@@ -51,14 +51,14 @@ FILE_7=GameManager.agc;-1
 FILE_8=Enemy.agc;-1
 
 [files]
-FILE_NAME_0=0;main.agc;224;0
+FILE_NAME_0=0;main.agc;752;0
 FILE_NAME_1=0;Globals.agc;1790;1
-FILE_NAME_2=0;Player.agc;7462;2
-FILE_NAME_3=1;Map.agc;13123;3
-FILE_NAME_4=0;LogicManager.agc;12332;4
-FILE_NAME_5=0;Input.agc;1113;5
-FILE_NAME_6=0;GameManager.agc;3452;6
-FILE_NAME_7=0;Enemy.agc;900;7
+FILE_NAME_2=0;Player.agc;7133;2
+FILE_NAME_3=0;Map.agc;1293;3
+FILE_NAME_4=0;LogicManager.agc;4466;4
+FILE_NAME_5=0;Input.agc;1856;5
+FILE_NAME_6=1;GameManager.agc;1143;6
+FILE_NAME_7=0;Enemy.agc;590;7
 
 [project]
 description=

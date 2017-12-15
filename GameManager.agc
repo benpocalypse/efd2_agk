@@ -37,6 +37,10 @@ global sEnding2 as STRING = "Thanks for playing!"
 
 
 FUNCTION GAME_ManageGame()
+
+	Print (ScreenFPS())
+	Print (CurrentState)
+	
     if((RequestedState > CurrentState) or (RequestedState < CurrentState))
         ModeExit(CurrentState)
         ModeEntry(RequestedState)
@@ -156,9 +160,8 @@ ENDFUNCTION
 FUNCTION ProcessTitlescreen()
     Time as INTEGER = 0
     
-    while((INPUT_GetButton(IN_START) > TRUE) or (INPUT_GetButton(IN_START) < TRUE))
+    while((INPUT_GetButton(IN_START) > TRUE) and (INPUT_GetButton(IN_START) < TRUE))
         Time = TIME + 1
-
     endwhile
 	// We seed our random number here, because it relies on the randomness of
 	// the player pressing start after they've been to the title screen.

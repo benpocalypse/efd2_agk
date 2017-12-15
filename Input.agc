@@ -23,6 +23,13 @@ FUNCTION INPUT_GetButton(Button as INTEGER)
 	//unsigned int uiJoy = ReadJoypad(0);
 	ReturnJoy as INTEGER
 
+	Print(GetPointerPressed())
+	Sync()
+
+	if (GetPointerPressed() = 1)
+		ReturnJoy = IN_START
+	endif
+	
     /*
     if(eButton == (C_INPUT)IN_UP)
     {

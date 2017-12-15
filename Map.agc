@@ -289,7 +289,7 @@ ENDFUNCTION objReturn
 FUNCTION MAP_TileIs(X as INTEGER, Y as INTEGER)
 	ucReturn as INTEGER
 	
-	if((X > 0) and (Y > 0))
+	if((X >= 0) and (Y >= 0))
 		temp as INTEGER
 		temp = objMap.length
 
