@@ -41,6 +41,7 @@
 // These variables are used to animate the player
 global PlayerRunFrame as INTEGER
 global PlayerRun as INTEGER[PLAYER_RUN_FRAMES]
+global PlayerSpriteIndex as INTEGER
 
 // These variables are used to animate the enemies.
 global EnemyRunFrame as INTEGER
@@ -75,10 +76,19 @@ FUNCTION LGC_Init()
 
     // Now set up our player animation variables
     PlayerRunFrame = PLAYER_IDLE
-    PlayerRun[0] = PLAYER_RUN1
-    PlayerRun[1] = PLAYER_RUN2
-    PlayerRun[2] = PLAYER_RUN3
-    PlayerRun[3] = PLAYER_RUN4
+    //PlayerRun[0] = PLAYER_RUN1
+    //PlayerRun[1] = PLAYER_RUN2
+    //PlayerRun[2] = PLAYER_RUN3
+    //PlayerRun[3] = PLAYER_RUN4
+    //LoadImage(PLAYER_IDLE, "Graphics/player0.png")
+    LoadImage(PLAYER_RUN1, "Graphics/player1.png")
+    //LoadImage(PLAYER_RUN2, "Graphics/player0.png")
+    //LoadImage(PLAYER_RUN3, "Graphics/player2.png")
+    //LoadImage(PLAYER_RUN4, "Graphics/player0.png")
+    
+    PlayerSpriteIndex = CreateSprite(PLAYER_RUN1)
+    SetImageMagFilter(PLAYER_RUN1, 0)
+    SetSpritePosition(PlayerSpriteIndex, 25, 75)
 
     EnemyRunFrame = ENEMY1_IDLE
     EnemyRun[0]   = ENEMY1_RUN1

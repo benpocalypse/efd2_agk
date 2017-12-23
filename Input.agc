@@ -20,14 +20,30 @@
 /// elsewhere in our code.
 ///****************************************************************************
 FUNCTION INPUT_GetButton(Button as INTEGER)
-	//unsigned int uiJoy = ReadJoypad(0);
 	ReturnJoy as INTEGER
-
-	Print(GetPointerPressed())
-	Sync()
-
-	if (GetPointerPressed() = 1)
+	
+	if (GetButtonPressed(1) = 1)
 		ReturnJoy = IN_START
+	endif
+	
+	if (GetButtonPressed(2) = 1)
+		ReturnJoy = IN_A
+	endif
+	
+	if(GetJoystickX() = -1)
+		ReturnJoy = IN_LEFT
+	endif
+	
+	if(GetJoystickX() = 1)
+		ReturnJoy = IN_RIGHT
+	endif
+	
+	if(GetJoystickY() = -1)
+		ReturnJoy = IN_DOWN
+	endif
+	
+	if(GetJoystickY() = 1)
+		ReturnJoy = IN_UP
 	endif
 	
     /*
